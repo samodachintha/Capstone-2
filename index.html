@@ -151,18 +151,38 @@
     </footer>
     <script>
         let lastScrollTop = 0;
+        let scrollTimeout;
+        let isScrollingUp = false;
         const header = document.querySelector('header');
         
         window.addEventListener('scroll', () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 50) {
-                // Scrolling down and past the top slightly
-                header.classList.add('header-hidden');
-            } else {
-                // Scrolling up
-                header.classList.remove('header-hidden');
+            
+            // Determine scroll direction
+            if (scrollTop < lastScrollTop) {
+                isScrollingUp = true;
+            } else if (scrollTop > lastScrollTop) {
+                isScrollingUp = false;
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            
+            // Hide the header immediately upon any active scrolling, unless at extremely top
+            if (scrollTop > 50) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            // Clear the existing timeout
+            window.clearTimeout(scrollTimeout);
+            
+            // Set a timer to check when the user stops scrolling
+            scrollTimeout = setTimeout(() => {
+                // If they stopped after scrolling up (or are at the top), show it
+                if (isScrollingUp || scrollTop <= 50) {
+                    header.classList.remove('header-hidden');
+                }
+            }, 200); // Wait 200ms after scroll to count as "stopping"
         });
     </script>
 </body>
