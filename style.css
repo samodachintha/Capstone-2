@@ -77,7 +77,9 @@ h1, h2, h3, h4 {
 .highlight {
   background: linear-gradient(90deg, var(--primary-color), var(--accent-alt));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
