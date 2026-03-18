@@ -1,48 +1,144 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Contact Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Details - Samod Achintha</title>
+    <!-- Add favicon links as in index.html, but correctly relative from Pages folder -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon_io/favicon-16x16.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .contact-page-section {
+            padding-top: 12rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+        .contact-info-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .contact-info-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+        }
+        .contact-info-card h3::before {
+            display: none !important; /* Hide the little dot from resume-card for symmetric alignment */
+        }
+        .contact-info-card p, .contact-info-card a {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .contact-info-card a:hover {
+            color: var(--primary-color);
+        }
+        .contact-page-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
 </head>
-
 <body>
+    <header>
+        <div class="logo">SAMOD ACHINTHA</div>
+        <nav>
+            <ul>
+                <li><a href="../index.html#hero">Home</a></li>
+                <li><a href="../index.html#resume">Resume</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#about">About Me</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h1>Contact Details</h1>
-    <hr>
+    <main>
+        <section class="contact-page-section">
+            <h1 class="section-title">Contact <span class="highlight">Details</span></h1>
+            
+            <div class="contact-cards">
+                <div class="resume-card contact-info-card">
+                    <h3>Phone</h3>
+                    <p>+94 763 500 253</p>
+                </div>
+                
+                <div class="resume-card contact-info-card">
+                    <h3>Email</h3>
+                    <a href="mailto:samodachintha@gmail.com">samodachintha@gmail.com</a>
+                </div>
+                
+                <div class="resume-card contact-info-card">
+                    <h3>Address</h3>
+                    <p>344/A, Attakorasa Road,<br>Ragama,<br>Sri Lanka</p>
+                </div>
+            </div>
 
-    <p><strong>Name:</strong> Samod Achintha</p>
-
-    <p><strong>Phone:</strong> +94 763 500 253</p>
-
-    <p>
-        <strong>Email:</strong>
-        <a href="mailto:samodachintha@gmail.com">
-            samodachintha@gmail.com
-        </a>
-    </p>
-
-    <p>
-        <strong>Address:</strong><br>
-        344/A, Attakorasa Road,<br>
-        Ragama,<br>
-        Sri Lanka
-    </p>
-
-    <p>
-        <strong>LinkedIn:</strong>
-        <a href="https://www.linkedin.com/in/samod-achintha/" target="_blank">
-            Visit Profile
-        </a>
-    </p>
-
-    <hr>
-
-    <a href="../index.html">Back to Resume</a>
+            <div class="contact-page-buttons">
+                <a href="https://www.linkedin.com/in/samod-achintha/" class="btn btn-outline" target="_blank">LinkedIn Profile</a>
+                <a href="https://github.com/samodachintha" class="btn btn-outline" target="_blank">GitHub Profile</a>
+                <a href="../index.html" class="btn btn-primary">Back to Resume</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2026 Samod Achintha</p>
+        <p>© 2026 Samod Achintha. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        // Matching script from index.html for animated header
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        let isScrollingUp = false;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop < lastScrollTop) {
+                isScrollingUp = true;
+            } else if (scrollTop > lastScrollTop) {
+                isScrollingUp = false;
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            
+            if (scrollTop > 50) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            window.clearTimeout(scrollTimeout);
+            
+            scrollTimeout = setTimeout(() => {
+                if (isScrollingUp || scrollTop <= 50) {
+                    header.classList.remove('header-hidden');
+                }
+            }, 200);
+        });
+    </script>
 </body>
-
 </html>
