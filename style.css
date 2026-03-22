@@ -403,7 +403,9 @@ section {
 
 .timeline-item:hover::before {
   background: var(--accent-alt);
-  box-shadow: 0 0 12px var(--accent-alt);
+  box-shadow: 0 0 15px var(--accent-alt), 0 0 30px rgba(112, 0, 255, 0.5);
+  transform: scale(1.2);
+  border-color: #fff;
 }
 
 .timeline-item:last-child {
@@ -411,9 +413,11 @@ section {
 }
 
 .timeline-item h4 {
-  font-size: 1.1rem;
-  color: #e2e8f0;
-  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.5px;
 }
 
 .timeline-item .date {
@@ -461,9 +465,10 @@ section {
 
 .skill-tag:hover {
   background: rgba(0, 240, 255, 0.15);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 240, 255, 0.15);
-  border-color: rgba(0, 240, 255, 0.5);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.6);
+  color: #fff;
 }
 
 .resume-link {
