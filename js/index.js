@@ -15,19 +15,26 @@ if (container) {
     container.appendChild(renderer.domElement);
 
     // Geometry & Premium MeshPhysicalMaterial
-    const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 128, 32);
+    // An Icosahedron gives a sleek, low-poly tech crystal vibe
+    const geometry = new THREE.IcosahedronGeometry(1.2, 0); 
     const material = new THREE.MeshPhysicalMaterial({
-        color: 0x00f0ff,
-        metalness: 0.1,
-        roughness: 0.15,
-        transmission: 0.9, // glass-like effect
-        ior: 1.5,
-        thickness: 0.5,
+        color: 0x050505, // matches your #050505 background tone
+        metalness: 0.9,   // highly metallic to reflect the neon lights
+        roughness: 0.15,  // glossy
         clearcoat: 1.0,
-        clearcoatRoughness: 0.1
+        clearcoatRoughness: 0.1,
+        transparent: true,
+        opacity: 0.9      // slight transparency to blend in seamlessly
     });
 
     const mesh = new THREE.Mesh(geometry, material);
+    
+    // Scale it down to be small but visible
+    mesh.scale.set(0.6, 0.6, 0.6);
+    
+    // Move it to the middle-left, so it sits behind the hero text and away from the profile pic!
+    mesh.position.set(-2.5, 0.5, -1);
+
     scene.add(mesh);
 
     // Floating animation offset
@@ -56,9 +63,9 @@ if (container) {
         mesh.rotation.x += 0.003;
         mesh.rotation.y += 0.005;
         
-        // Gentle floating effect
+        // Gentle floating effect with its new base Y position
         time += 0.01;
-        mesh.position.y = Math.sin(time) * 0.2;
+        mesh.position.y = 0.5 + Math.sin(time) * 0.15;
 
         renderer.render(scene, camera);
     };
