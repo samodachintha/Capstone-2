@@ -37,6 +37,23 @@ if (container) {
 
     scene.add(mesh);
 
+    let basePositionY = 0.5;
+    const updateMeshDisplay = () => {
+        if (window.innerWidth <= 768) {
+            // Mobile view: slightly smaller and centered above the text or behind it
+            mesh.position.set(0, 1.5, -2);
+            basePositionY = 1.5;
+            mesh.scale.set(0.45, 0.45, 0.45);
+        } else {
+            // Desktop view: middle-left
+            mesh.position.set(-2.5, 0.5, -1);
+            basePositionY = 0.5;
+            mesh.scale.set(0.6, 0.6, 0.6);
+        }
+    };
+    // Initialize position/scale
+    updateMeshDisplay();
+
     // Floating animation offset
     let time = 0;
 
@@ -63,9 +80,9 @@ if (container) {
         mesh.rotation.x += 0.003;
         mesh.rotation.y += 0.005;
         
-        // Gentle floating effect with its new base Y position
+        // Gentle floating effect with its dynamic base Y position
         time += 0.01;
-        mesh.position.y = 0.5 + Math.sin(time) * 0.15;
+        mesh.position.y = basePositionY + Math.sin(time) * 0.15;
 
         renderer.render(scene, camera);
     };
@@ -77,5 +94,7 @@ if (container) {
         if (!container) return;
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        updateMeshDisplay();
     });
 }
